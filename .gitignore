@@ -150,6 +150,12 @@ cython_debug/
 # Backup files
 *.bak
 
+# Ignore everything in the Commentated_Games directory
+Commentated_Games/*
+
+# But keep the directory itself
+!Commentated_Games/.gitkeep
+
 # Other files to ignore
 .DS_Store
 Thumbs.db

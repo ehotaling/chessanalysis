@@ -1,1 +1,20 @@
-1. e4 e5 2. Nf3
+[Event "Rated Rapid game"]
+[Site "https://lichess.org/V8myQfP5"]
+[Date "2023.11.10"]
+[White "rikkkan52"]
+[Black "Sentinel0352"]
+[Result "1-0"]
+[UTCDate "2023.11.10"]
+[UTCTime "14:23:28"]
+[WhiteElo "1318"]
+[BlackElo "1188"]
+[WhiteRatingDiff "+20"]
+[BlackRatingDiff "-4"]
+[Variant "Standard"]
+[TimeControl "600+0"]
+[ECO "C29"]
+[Opening "Vienna Game: Vienna Gambit"]
+[Termination "Normal"]
+[Annotator "lichess.org"]
+
+1. e4

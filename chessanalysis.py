@@ -43,13 +43,22 @@ def analyze(pgn_file_path):
     with open(pgn_file_path) as p:
         game = chess.pgn.read_game(p)
 
-    # Get player names from the game headers or use default names if not present.
-    white_player = sanitize_filename(game.headers.get('White', 'Unknown_White'))
-    black_player = sanitize_filename(game.headers.get('Black', 'Unknown_Black'))
+    # Check if player names are '?', absent, or empty, and replace with 'Unknown'.
+    white_player = 'Unknown' if game.headers.get('White', 'Unknown') in ['?', ''] else game.headers['White']
+    black_player = 'Unknown' if game.headers.get('Black', 'Unknown') in ['?', ''] else game.headers['Black']
+
+    # Sanitize player names to prevent invalid characters in filenames.
+    white_player_sanitized = sanitize_filename(white_player)
+    black_player_sanitized = sanitize_filename(black_player)
+
+    # Create 'Commentated_Games' directory if it doesn't exist.
+    commentated_games_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'Commentated_Games')
+    if not os.path.exists(commentated_games_dir):
+        os.makedirs(commentated_games_dir)
 
     # Construct a new filename for the output PGN file.
-    new_filename = f"{white_player}_vs_{black_player}.pgn"
-    new_file_path = os.path.join(os.path.dirname(pgn_file_path), new_filename)
+    new_filename = f"{white_player_sanitized}_vs_{black_player_sanitized}.pgn"
+    new_file_path = os.path.join(commentated_games_dir, new_filename)
 
     # Create a new game object to store the game with commentary.
     game_with_commentary = chess.pgn.Game()
