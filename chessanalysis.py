@@ -5,7 +5,7 @@ from openai import OpenAI
 import re
 
 # Initialize the argument parser to receive a PGN file path from the command line.
-parser = argparse.ArgumentParser(description="Analyze a chess PGN file and provide commentary on each move.")
+parser = argparse.ArgumentParser(description="Analyze a chess PGN file and provide a brief commentary on each move.")
 parser.add_argument("pgn_file_path", help="Path to the PGN file to be analyzed")
 
 # Parse the provided command line arguments.
@@ -20,12 +20,20 @@ client = OpenAI(
 def get_move_commentary(move_san, fen):
     # Request a completion from the OpenAI API based on the current board position and move.
     completion = client.chat.completions.create(
-        model="gpt-3.5-turbo-1106",
+        model="gpt-4-1106-preview", # Can use gpt-3.5-turbo-1106, gpt-3.5-turbo, gpt-4-1106-preview, gpt-4, gpt-4-32k
         messages=[
             {"role": "system",
-             "content": "You are a chess assistant, skilled in analyzing chess games."},
+             "content": "You are an advanced chess assistant with deep knowledge of chess rules, tactics, "
+                        "and strategies."
+                        "You are to analyze given chess moves, assuming they are legal and accurate, "
+                        "and provide brief but insightful commentary based on the current board position in light of "
+                        "previous"
+                        "moves"},
             {"role": "user",
-             "content": f"Given the board position {fen}, provide a short commentary on this move {move_san}"}
+             "content": f"The current board position is represented by this FEN: '{fen}'. The move just made is "
+                        f"'{move_san}', which is legal and valid in this position. Please provide a brief analysis "
+                        f"and commentary on this move,"
+                        f"considering its impact in the context of the game's progression, tactics, strategy."}
         ]
     )
     # Extract the commentary from the API's response.
