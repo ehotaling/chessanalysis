@@ -26,7 +26,7 @@ This program analyzes chess games provided in a PGN file format. It utilizes the
 ## Usage
 Run the program from the command line, providing the path to the PGN file:
 ```
-python chess_analysis.py path_to_your_pgn_file.pgn
+python chessanalysis.py path_to_your_pgn_file.pgn
 ```
 
 ## Features
